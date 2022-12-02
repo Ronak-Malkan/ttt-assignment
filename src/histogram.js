@@ -4,8 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 function Histogram(props){
 
-   const [topWords, setTopWors] = React.useState(new Map());
-   const [data, setData] = React.useState(new Array);
+   // eslint-disable-next-line
+   const [topWords, setTopWords] = React.useState(new Map());
+   const [data, setData] = React.useState([]);
 
    React.useEffect(()=> {
       let words = props.fetchedText.split(/(\s|\.|,|\?|\n|\(|\)|{|}|\/|"|:)/);
@@ -15,7 +16,7 @@ function Histogram(props){
          if( words[i] === "" || words[i] === "–" || words[i] === " " || words[i] === "." || words[i] === "," || words[i] === "?" || words[i] === "\n" || words[i] === "(" || words[i] === ")" || words[i] === "{" || words[i] === "}" || words[i] === "/" || words[i] === '"' || words[i] === ":"){
             continue;
          }
-         temp.push(words[i]);
+         temp.push(words[i].toLowerCase());
       }
       words = temp;
       let wordFrequence = new Map();
@@ -46,6 +47,7 @@ function Histogram(props){
       })
       setData(tempData);
       console.log(data);
+   // eslint-disable-next-line   
    }, [])
    return (
       <div className='chartContainer'>
