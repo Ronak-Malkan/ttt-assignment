@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Histogram from './histogram';
+import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [renderButton, changeRender] = React.useState(true);
+  const [fetchedText, changeText] = React.useState("Hi");
+
+  function changePage(){
+    fetch('https://www.terriblytinytales.com/test.txt')
+    .then((res) => res.text())
+    .then((text) => {
+      changeText(text);
+      changeRender(false);
+    });
+  }
+
+  if(renderButton){
+    return (
+      <button className='submitButton' onClick={changePage}>Submit</button>
+    );
+  }
+  else {
+    return(
+      <Histogram fetchedText={fetchedText}/>
+    );
+  }
 }
 
 export default App;
