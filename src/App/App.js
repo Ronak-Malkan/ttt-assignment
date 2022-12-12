@@ -1,5 +1,5 @@
 import './App.css';
-import Histogram from './histogram';
+import Histogram from '../Graph/histogram';
 import React from 'react';
 
 function App() {

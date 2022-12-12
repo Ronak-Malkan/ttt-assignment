@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+
+* {
+   margin: 0 0;
+   padding: 0 0;
+   box-sizing: border-box;
+   font-family: 'Inter', sans-serif;
+}
+
+body {
+   height: 100%;
+   width: 100%;
+   background-color: white;
+   text-align: center;
+}
+
+.submitButton {
+  display: inline-block;
+  font-size: 1.6vw;
+  font-weight: 600;
+  padding: 0.8vh 1.3vw;
+  margin: auto;
+  margin-top: 43vh;
+  background-color: #d1dff3;
+  color: black;
+  border: 0.2vw solid black;
+}
+
+.submitButton:hover {
+  cursor: pointer;
+  scale: 1.07;
+}

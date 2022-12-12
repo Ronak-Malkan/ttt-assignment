@@ -1,6 +1,6 @@
 import React from 'react';
+import './graph.css';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
 
 function Histogram(props){
 
@@ -9,8 +9,34 @@ function Histogram(props){
    const [data, setData] = React.useState([]);
 
    React.useEffect(()=> {
+
+      //parse the text into words
+      let words = parseText();
+      
+      //calculate the word frequency of every word
+      let wordFrequency = new Map();
+      wordFrequency = calculateWordFreq(words);
+   
+      //store the top 20 most frequent words
+      let i=0;
+      wordFrequency.forEach((value, key) => {
+         if(i<20){
+            console.log(key, "  ", value);
+            topWords.set(key, value);
+            i++;
+         }
+      })
+      let tempData = []
+      topWords.forEach((value, key)=> {
+         tempData.push({"Words": key, "Frequency": value});
+      })
+      setData(tempData);
+      console.log(tempData);
+   // eslint-disable-next-line   
+   }, [])
+
+   const parseText = () => {
       let words = props.fetchedText.split(/(\s|\.|,|\?|\n|\(|\)|{|}|\/|"|:)/);
-      console.log(words);
       const temp = [];
       for(let i=0; i<words.length; i++){
          if( words[i] === "" || words[i] === "–" || words[i] === " " || words[i] === "." || words[i] === "," || words[i] === "?" || words[i] === "\n" || words[i] === "(" || words[i] === ")" || words[i] === "{" || words[i] === "}" || words[i] === "/" || words[i] === '"' || words[i] === ":"){
@@ -19,36 +45,26 @@ function Histogram(props){
          temp.push(words[i].toLowerCase());
       }
       words = temp;
-      let wordFrequence = new Map();
+      return words;
+   }
+
+   const calculateWordFreq = (words) => {
+      let wordFrequency = new Map();
       let word;
       for(let i=0; i<words.length; i++){
-         word = wordFrequence.get(words[i]);
+         word = wordFrequency.get(words[i]);
          if(word != null){
-            wordFrequence.set(words[i], word+1);
+            wordFrequency.set(words[i], word+1);
          }
          else {
-            wordFrequence.set(words[i], 1);
+            wordFrequency.set(words[i], 1);
          }
       }
-      wordFrequence = new Map([...wordFrequence].sort((a,b)=> b[1]-a[1]));
-      let i=0;
-      console.log(wordFrequence);
-      wordFrequence.forEach((value, key) => {
-         if(i<20){
-            console.log(key, "  ", value);
-            topWords.set(key, value);
-            i++;
-         }
-      })
-      console.log(topWords);
-      let tempData = []
-      topWords.forEach((value, key)=> {
-         tempData.push({"Words": key, "Frequency": value});
-      })
-      setData(tempData);
-      console.log(data);
-   // eslint-disable-next-line   
-   }, [])
+      wordFrequency = new Map([...wordFrequency].sort((a,b)=> b[1]-a[1]));
+      return wordFrequency;
+   }
+
+   
    return (
       <div className='chartContainer'>
          <ResponsiveContainer>

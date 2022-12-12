@@ -16,26 +16,9 @@ body {
    text-align: center;
 }
 
-.submitButton {
-  display: inline-block;
-  font-size: 1.6vw;
-  font-weight: 600;
-  padding: 0.8vh 1.3vw;
-  margin: auto;
-  margin-top: 43vh;
-  background-color: #d1dff3;
-  color: black;
-  border: 0.2vw solid black;
-}
-
-.submitButton:hover {
-  cursor: pointer;
-  scale: 1.07;
-}
-
 .chartContainer {
-  width: 70%;
-  height: 60vh;
-  margin: auto;
-  margin-top: 20vh;
-}
+   width: 70%;
+   height: 60vh;
+   margin: auto;
+   margin-top: 20vh;
+ }
